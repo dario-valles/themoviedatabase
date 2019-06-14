@@ -1,8 +1,8 @@
 <template>
   <nuxt-link :to="'/' + id">
     <article>
-      <div class="title">{{title}}</div>
-      <div class="description">{{description}}</div>
+      <div>{{title}}</div>
+      <img :src="'https://image.tmdb.org/t/p/w780' + image" :alt="title">
     </article>
   </nuxt-link>
 </template>
@@ -11,6 +11,6 @@
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
-  props: ["title", "description", "id"]
+  props: ["title", "image", "id"]
 });
 </script>

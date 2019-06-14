@@ -6,7 +6,7 @@
         v-for="movie in poupularMovies"
         :key="movie.id"
         :title="movie.title"
-        description="Una peli increible"
+        :image="movie.backdrop_path"
         :id="movie.id"
       />
     </div>
@@ -29,11 +29,6 @@ export default {
       return this.$store.state.popularFilms;
     }
   }
-  // async asyncData() {
-  //   const poupularMovies = await moviesAPI.discoverPopularMovies();
-  //   console.log(poupularMovies.results);
-  //   return { poupularMovies: poupularMovies.results };
-  // },
 };
 </script>
 
