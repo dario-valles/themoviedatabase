@@ -1,0 +1,71 @@
+<template>
+  <div class="container">
+    <div>
+      <h1 class="title">Movies</h1>
+      <Movie
+        v-for="movie in poupularMovies"
+        :key="movie.id"
+        :title="movie.title"
+        description="Una peli increible"
+        :id="movie.id"
+      />
+    </div>
+  </div>
+</template>
+
+<script>
+import Movie from "@/components/Movie";
+import { mapState } from "vuex";
+
+export default {
+  components: {
+    Movie
+  },
+  mounted() {
+    this.$store.dispatch("setPopularFilms");
+  },
+  computed: {
+    poupularMovies() {
+      return this.$store.state.popularFilms;
+    }
+  }
+  // async asyncData() {
+  //   const poupularMovies = await moviesAPI.discoverPopularMovies();
+  //   console.log(poupularMovies.results);
+  //   return { poupularMovies: poupularMovies.results };
+  // },
+};
+</script>
+
+<style>
+.container {
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  display: block;
+  font-weight: 300;
+  font-size: 100px;
+  color: #35495e;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-weight: 300;
+  font-size: 42px;
+  color: #526488;
+  word-spacing: 5px;
+  padding-bottom: 15px;
+}
+
+.links {
+  padding-top: 15px;
+}
+</style>
