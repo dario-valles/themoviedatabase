@@ -1,16 +1,32 @@
 <template>
-  <nuxt-link :to="'/' + id">
+  <div class="column is-4">
     <article>
-      <div>{{title}}</div>
-      <img :src="'https://image.tmdb.org/t/p/w780' + image" :alt="title">
+      <div>
+        <h5 class="title is-5">
+          {{title}}
+          <span v-if="isFavorite" class="icon has-text-danger">❤</span>
+        </h5>
+      </div>
+      <nuxt-link :to="'/' + id">
+        <img :src="'https://image.tmdb.org/t/p/w780' + image" :alt="title">
+      </nuxt-link>
     </article>
-  </nuxt-link>
+  </div>
 </template>
 
 
-<script lang="ts">
-import Vue from "vue";
-export default Vue.extend({
-  props: ["title", "image", "id"]
-});
+<script>
+export default {
+  props: ["title", "image", "id"],
+
+  computed: {
+    isFavorite() {
+      if (this.$store.getters.getLoggedIn) {
+        const favorites = this.$store.getters.getUserFavorites;
+        return favorites.some(fav => fav.id === this.id);
+      }
+    }
+  }
+};
 </script>
+

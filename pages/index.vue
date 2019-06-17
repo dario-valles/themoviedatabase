@@ -2,13 +2,15 @@
   <div class="container">
     <div>
       <h1 class="title">Movies</h1>
-      <Movie
-        v-for="movie in poupularMovies"
-        :key="movie.id"
-        :title="movie.title"
-        :image="movie.backdrop_path"
-        :id="movie.id"
-      />
+      <div class="columns is-multiline">
+        <Movie
+          v-for="movie in poupularMovies"
+          :key="movie.id"
+          :title="movie.title"
+          :image="movie.backdrop_path"
+          :id="movie.id"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -21,9 +23,11 @@ export default {
   components: {
     Movie
   },
+
   mounted() {
     this.$store.dispatch("setPopularFilms");
   },
+
   computed: {
     poupularMovies() {
       return this.$store.state.popularFilms;

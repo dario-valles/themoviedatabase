@@ -1,52 +1,75 @@
 <template>
   <section>
-    <div v-if="userLoggedIn">User logged in</div>
-    <div v-else>
-      Not logged In
-      <button v-on:click="requestToken">Log In</button>
+    <div v-if="userLoggedIn">
+      <h2
+        class="title is-2"
+      >Welcome {{userDetails.name || userDetails.username}}, your id is {{userDetails.id}}</h2>
+      <div>
+        <h3 class="title is-3">Your lists are:</h3>
+        <div class="list is-hoverable">
+          <a class="list-item" v-for="list in userLists" :key="list.id">{{list.name}}</a>
+        </div>
+      </div>
+      <div>
+        <h3 class="title is-3">Your favorites Movies Are:</h3>
+        <div class="columns is-multiline">
+          <Movie
+            v-for="movie in userFavorites"
+            :key="movie.id"
+            :title="movie.title"
+            :image="movie.backdrop_path"
+            :id="movie.id"
+          />
+        </div>
+      </div>
     </div>
+    <div v-else>Please login to see your profile</div>
   </section>
 </template>
 
-
 <script>
 import { URLSearchParams } from "url";
+import Movie from "@/components/Movie";
+
 export default {
+  components: {
+    Movie
+  },
+
   methods: {
-    async requestToken() {
-      console.log("hola");
-      await this.$store.dispatch("requestToken");
-      //console.log(result);
-      window.location.href = `https://www.themoviedb.org/authenticate/${
-        this.$store.state.token
-      }?redirect_to=${location.protocol}//${location.host}/profile`;
-    },
     async requestPermission() {
-      console.log("AQUI", this.$route.query.request_token);
       const userToken = this.$route.query.request_token;
-      if (userToken && !this.userLoggedIn) {
-        await this.$store.dispatch("requestSessionId", userToken);
-        localStorage.setItem("session_id", id);
-        console.log("AQUI2", this.$store.getters.getSession);
+      if (userToken && !this.$store.getters.getLoggedIn) {
+        await this.$store.dispatch("requestLoggedIn", userToken);
+        await this.$store.dispatch("setUserDetails");
+        await this.$store.dispatch("setUserFavorites");
+        await this.$store.dispatch("setUserLists");
       }
     }
   },
 
-  created() {
-    if (!this.$store.getters.getSession) {
+  beforeMount() {
+    if (!this.$store.getters.getLoggedIn) {
       this.requestPermission();
     }
   },
-  mounted() {
-    this.$store.dispatch("setPopularFilms");
-  },
-  computed: {
 
-      return this.$store.state.sessionId || null;
+  computed: {
+    userLoggedIn() {
+      return this.$store.getters.getLoggedIn;
+    },
+
+    userDetails() {
+      return this.$store.getters.getUserDetails;
+    },
+
+    userFavorites() {
+      return this.$store.getters.getUserFavorites;
+    },
+
+    userLists() {
+      return this.$store.getters.getUserLists;
     }
   }
 };
 </script>
-
-<style>
-</style>
