@@ -1,5 +1,5 @@
 import vuex from 'vuex';
-import MovieDB from 'moviedatabaselibrary';
+import MovieDB from '../../Erika/themoviedb';
 import { User } from './models/UserModel';
 import { Lists, Movies, Movie } from './models/MovieModel';
 
