@@ -4681,10 +4681,10 @@ move-concurrently@^1.0.1:
     rimraf "^2.5.4"
     run-queue "^1.0.3"
 
-moviedatabaselibrary@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/moviedatabaselibrary/-/moviedatabaselibrary-1.0.0.tgz#d29a8571407181576b50c8495a798de8bb900a70"
-  integrity sha512-HjYlekJPewOXLmVkAF9r1uldpO8SaXcaYYziuIlYpPK9FjZBJxXBgaSNwNRIqSJD9hG5mHxJOhWWCMQBNFCtkw==
+moviedatabaselibrary@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/moviedatabaselibrary/-/moviedatabaselibrary-1.0.4.tgz#0b263cbef127b31218651a6f389c1acb2fe91eea"
+  integrity sha512-zmOo8/z/PC6cA179ikaTrV4tzTf3USPomR+CqzsU8EqxbpIAxEXAO/VlAMiyiHxvATnQ+VJR7RJWUJKYDPhNsw==
   dependencies:
     "@types/node" "^12.0.8"
     "@types/node-fetch" "^2.3.6"
