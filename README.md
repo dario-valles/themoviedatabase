@@ -1,7 +1,7 @@
 # Small MVP for test assignment
 
 >  Stack NUXTJS, VUEX and [the movie database API](https://developers.themoviedb.org/3)
->  Created small library as a [NPM package] (https://www.npmjs.com/package/moviedatabaselibrary)
+>  Created small library as a [NPM package](https://www.npmjs.com/package/moviedatabaselibrary)
 
 ## Build Setup
 
